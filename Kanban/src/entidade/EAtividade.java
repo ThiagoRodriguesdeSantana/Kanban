@@ -8,10 +8,10 @@ public class EAtividade {
     private Date dataDeEntrega;
     private boolean concluida;
     private String relatoFinal;
-    private Usuario usuario;
+    private EUsuario usuario;
 
     public EAtividade() {
-        this.usuario = new Usuario();
+        this.usuario = new EUsuario();
     }
     
     public int getCodigo() {
@@ -54,11 +54,11 @@ public class EAtividade {
         this.relatoFinal = relatoFinal;
     }
 
-    public Usuario getUsuario() {
+    public EUsuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(EUsuario usuario) {
         this.usuario = usuario;
     }
     
