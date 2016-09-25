@@ -62,5 +62,20 @@ public class EAtividade {
         this.usuario = usuario;
     }
     
+    @Override
+    public String toString(){
+        
+        String AtividadeEmTexto = "";
+        
+        AtividadeEmTexto += getCodigo()+"\n";
+        AtividadeEmTexto += getDescricao()+"\n";
+        AtividadeEmTexto += getDataDeEntrega()+"\n";
+        AtividadeEmTexto += getRelatoFinal()+"\n";
+        AtividadeEmTexto += isConcluida()+"\n";
+        AtividadeEmTexto += getUsuario().getCodigo();
+        
+        return AtividadeEmTexto;
+    }
+    
     
 }
