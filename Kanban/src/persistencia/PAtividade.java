@@ -15,9 +15,9 @@ public class PAtividade {
         String sql = "INSERT INTO atividade (descricao, data_de_entrega,concluida, relato_final, codigo_usuario)"
                 +"VALUES(?,?,?,?,?)";
         
-        Connection cnn = util.Conexao.getConexao();
+        Connection conn = util.Conexao.getConexao();
         
-        PreparedStatement prd = cnn.prepareStatement(sql);
+        PreparedStatement prd = conn.prepareStatement(sql);
         
         prd.setString(1, eAtividade.getDescricao());
         prd.setDate(2, eAtividade.getDataDeEntrega());
@@ -28,7 +28,7 @@ public class PAtividade {
                 
         prd.execute();
         prd.close();
-        cnn.close();
+        conn.close();
     }
     
     public void alterar(EAtividade eAtividade)throws SQLException{

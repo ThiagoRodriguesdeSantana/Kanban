@@ -104,7 +104,7 @@ public class PUsuario {
     }
     
       public EUsuario BuscarPorEamil(String email) throws SQLException {
-        String sql = "SELECT codigo, senha, email, nome FROM public.usuario where email like = '" + email + "'%;";
+        String sql = "SELECT codigo, senha, email, nome FROM public.usuario where email = '" + email + "';";
 
         Connection conn = util.Conexao.getConexao();
 

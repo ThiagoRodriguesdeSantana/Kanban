@@ -47,7 +47,7 @@ public class NUsuario {
         return pUsuario.Listar();
     }
 
-    private boolean ValidarLogin(String email, String senha) throws SQLException, Exception {
+    public boolean ValidarLogin(String email, String senha) throws SQLException, Exception {
         
         if(!pUsuario.BuscarPorEamil(email).getSenha().equals(senha))
              throw new Exception("Usuário não encontrado!");

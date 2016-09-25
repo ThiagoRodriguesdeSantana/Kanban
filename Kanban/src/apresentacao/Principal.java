@@ -16,6 +16,8 @@ public class Principal extends javax.swing.JInternalFrame {
      */
     public Principal() {
         initComponents();
+        LoginUsuario login = new LoginUsuario();
+        login.setVisible(true);
     }
 
     /**
@@ -101,3 +103,4 @@ public class Principal extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
+ 
