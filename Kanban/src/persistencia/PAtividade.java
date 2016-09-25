@@ -53,7 +53,7 @@ public class PAtividade {
     
     public void excluir(int codigo)throws SQLException{
         
-        String sql = "DELETE FROM entidade WHERE "
+        String sql = "DELETE FROM entidade WHERE ";
     }
     
 }
