@@ -10,7 +10,7 @@ import negocio.NAtividade;
 
 public class TesteAtividade {
     
-    public static void main(String[] args){
+ //   public static void main(String[] args){
 //        try{
 //        EAtividade eAtividade = new EAtividade();
 //        
@@ -43,7 +43,7 @@ public class TesteAtividade {
 //            e.printStackTrace();
 //        }
 
-        try{
+ //       try{
             
 //            EAtividade eAtividade = new EAtividade();
 //            eAtividade.setCodigo(1);
@@ -53,25 +53,25 @@ public class TesteAtividade {
 //            eAtividade = nAtividade.consultar(eAtividade.getCodigo());
 //            
 //            System.out.println(eAtividade);
-
-            NAtividade nAtividade = new NAtividade();
-            
-            List<EAtividade> lista = new ArrayList<>();
-            
-            
-            lista = nAtividade.Listar("l");
-            
-            for (EAtividade eAtividade : lista) {
-                System.out.println(eAtividade);
-                System.out.println("--------");
-            }
-            
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+//
+//            NAtividade nAtividade = new NAtividade();
+//            
+//            List<EAtividade> lista = new ArrayList<>();
+//            
+//            
+//            lista = nAtividade.Listar("l");
+//            
+//            for (EAtividade eAtividade : lista) {
+//                System.out.println(eAtividade);
+//                System.out.println("--------");
+//            }
+//            
+//            
+//            
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
         
-    }
+ //   }
     
 }
