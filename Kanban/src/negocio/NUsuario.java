@@ -8,6 +8,7 @@ package negocio;
 import entidade.EUsuario;
 import java.sql.SQLException;
 import java.util.List;
+import org.apache.commons.mail.EmailException;
 import persistencia.PUsuario;
 
 public class NUsuario {
@@ -55,6 +56,15 @@ public class NUsuario {
         
           eUsuario = pUsuario.BuscarPorEamil(email);
           return true;
+        
+    }
+    public void InserirCodigo(int codigo, String email) throws SQLException{
+        
+        pUsuario.InserirCodigo(codigo, email);
+    }
+    public void EnviarEmail(String email) throws EmailException, SQLException{
+        
+        Servicos.EnviarEmailDeConfirmacao(email);
         
     }
     

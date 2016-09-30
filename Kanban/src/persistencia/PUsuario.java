@@ -15,11 +15,11 @@ public class PUsuario {
         String sql = "INSERT INTO public.usuario(senha, email, nome)\n"
                 + "VALUES ('" + eUsuario.getSenha() + "','" + eUsuario.getEmail() + "','" + eUsuario.getNome() + "');";
 
-            Connection conn = util.Conexao.getConexao();
-            Statement prd = conn.createStatement();
-            prd.execute(sql);
-            conn.close();
-       
+        Connection conn = util.Conexao.getConexao();
+        Statement prd = conn.createStatement();
+        prd.execute(sql);
+        conn.close();
+
     }
 
     public void Alterar(EUsuario eUsuario) throws SQLException {
@@ -102,8 +102,8 @@ public class PUsuario {
 
         return eUsuario;
     }
-    
-      public EUsuario BuscarPorEamil(String email) throws SQLException {
+
+    public EUsuario BuscarPorEamil(String email) throws SQLException {
         String sql = "SELECT codigo, senha, email, nome FROM public.usuario where email = '" + email + "';";
 
         Connection conn = util.Conexao.getConexao();
@@ -112,17 +112,25 @@ public class PUsuario {
         ResultSet rs = st.executeQuery(sql);
 
         EUsuario eUsuario = new EUsuario();
-        while(rs.next()){
-       
+        while (rs.next()) {
 
-        eUsuario.setCodigo(rs.getInt("codigo"));
-        eUsuario.setSenha(rs.getString("senha"));
-        eUsuario.setEmail(rs.getString("email"));
-        eUsuario.setNome(rs.getString("nome"));
+            eUsuario.setCodigo(rs.getInt("codigo"));
+            eUsuario.setSenha(rs.getString("senha"));
+            eUsuario.setEmail(rs.getString("email"));
+            eUsuario.setNome(rs.getString("nome"));
         }
-        
 
         return eUsuario;
+    }
+
+    public void InserirCodigo(int codigo, String email) throws SQLException {
+        
+        String sql = "INSERT INTO public.confirmacao(codigo, email) VALUES ("+codigo+", "+email+");";
+
+        Connection conn = util.Conexao.getConexao();
+        Statement prd = conn.createStatement();
+        prd.execute(sql);
+        conn.close();
     }
 
 }
