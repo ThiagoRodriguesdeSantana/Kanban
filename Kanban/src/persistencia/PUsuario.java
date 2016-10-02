@@ -1,7 +1,9 @@
 package persistencia;
 
+import entidade.EAtividade;
 import entidade.EUsuario;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -123,14 +125,36 @@ public class PUsuario {
         return eUsuario;
     }
 
-    public void InserirCodigo(int codigo, String email) throws SQLException {
-        
-        String sql = "INSERT INTO public.confirmacao(codigo, email) VALUES ("+codigo+", "+email+");";
+    public void InserirCodigo(int codigo, String mail) throws SQLException {
+
+        String sql = "INSERT INTO public.confirmacao(codigo, email) VALUES (" + codigo + ", '" + mail + "');";
 
         Connection conn = util.Conexao.getConexao();
         Statement prd = conn.createStatement();
         prd.execute(sql);
         conn.close();
+    }
+
+    public String PegarCodigo(int codigo) throws SQLException {
+
+        String sql = "SELECT email FROM public.confirmacao where codigo = " + codigo;
+
+        Connection cnn = util.Conexao.getConexao();
+        PreparedStatement prd = cnn.prepareStatement(sql);
+
+        ResultSet rs = prd.executeQuery();
+
+        String email = "";
+        if (rs.next()) {
+            email = rs.getString("email");
+
+        }
+
+        prd.close();
+        rs.close();
+        cnn.close();
+
+        return email;
     }
 
 }

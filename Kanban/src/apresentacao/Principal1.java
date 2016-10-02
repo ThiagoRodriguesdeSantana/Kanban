@@ -11,16 +11,31 @@ package apresentacao;
  */
 public class Principal1 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal1
-     */
+    
     public Principal1() {
         initComponents();
+   
         
+    }
+    public Principal1(CadastroUsuario tela) {
+        initComponents();
+        
+        this.pnlPrincipal.add(tela);
+        tela.setVisible(true);  
+   
+        
+    }
+    public void Cadastrar(String eamil){
+         CadastroUsuario cadastroUsuario = new CadastroUsuario();
+        this.pnlPrincipal.add(cadastroUsuario);
+        cadastroUsuario.setVisible(true);  
+    }
+    private void loginUsuario(){
         LoginUsuario loginUsuario = new LoginUsuario();
         this.pnlPrincipal.add(loginUsuario);
         loginUsuario.setVisible(true);
     }
+
 
     
     @SuppressWarnings("unchecked")
@@ -29,8 +44,8 @@ public class Principal1 extends javax.swing.JFrame {
 
         pnlPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        formCadastro = new javax.swing.JMenu();
+        tarefa = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -44,17 +59,17 @@ public class Principal1 extends javax.swing.JFrame {
             .addGap(0, 452, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Novo");
+        formCadastro.setText("Novo");
 
-        jMenuItem1.setText("Cadastre-se");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        tarefa.setText("Tarefa");
+        tarefa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                tarefaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        formCadastro.add(tarefa);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(formCadastro);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -75,50 +90,53 @@ public class Principal1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void tarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarefaActionPerformed
+       
+    }//GEN-LAST:event_tarefaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal1().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Principal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Principal1().setVisible(true);
+//            }
+//        });
+//    }
+ 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu formCadastro;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane pnlPrincipal;
+    private javax.swing.JMenuItem tarefa;
     // End of variables declaration//GEN-END:variables
 }
+
