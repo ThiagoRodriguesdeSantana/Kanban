@@ -67,6 +67,7 @@ public class NUsuario {
         if (pUsuario.BuscarPorEamil(email).getCodigo() == 0 || !pUsuario.BuscarPorEamil(email).getSenha().equals(senha)) {
             throw new Exception("Usuário não encontrado!");
         }
+        
 
         eUsuario = pUsuario.BuscarPorEamil(email);
         return true;

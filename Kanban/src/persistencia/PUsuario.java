@@ -79,10 +79,12 @@ public class PUsuario {
 
         EUsuario eUsuario = new EUsuario();
 
+        while(rs.next()){
         eUsuario.setCodigo(rs.getInt("codigo"));
         eUsuario.setSenha(rs.getString("senha"));
         eUsuario.setSenha(rs.getString("email"));
         eUsuario.setSenha(rs.getString("nome"));
+        }
 
         return eUsuario;
     }

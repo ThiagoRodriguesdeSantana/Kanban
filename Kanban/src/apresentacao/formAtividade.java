@@ -5,17 +5,39 @@
  */
 package apresentacao;
 
+import entidade.EAtividade;
+import javax.swing.JOptionPane;
+import negocio.NAtividade;
+import negocio.NUsuario;
+
 /**
  *
  * @author Thiago
  */
 public class formAtividade extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form formAtividade
-     */
+    NAtividade _Atividade = new NAtividade();
+    private boolean _Editar;
+
     public formAtividade() {
         initComponents();
+
+    }
+
+    public formAtividade(int codigo) throws Exception {
+
+        NAtividade atividade = new NAtividade();
+        EAtividade eAtividade = atividade.consultar(codigo);
+
+        initComponents();
+        _Editar = true;
+        txtCodigo.setText("" + eAtividade.getCodigo());
+        txtDescricao.setText(eAtividade.getDescricao());
+        txtObservacoes.setText(eAtividade.getRelatoFinal());
+        txtData.setText(eAtividade.getDataDeEntrega());
+        chkConcluida.setSelected(eAtividade.isConcluida());
+
+        cmdSalvar.setText("Atualizar");
     }
 
     /**
@@ -32,49 +54,104 @@ public class formAtividade extends javax.swing.JInternalFrame {
         txtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
-        chkConclusao = new javax.swing.JCheckBox();
+        chknova = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         txtData = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         chkAnalise = new javax.swing.JCheckBox();
         chkDesenvolvimento = new javax.swing.JCheckBox();
         chkConcluida = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cmdBuscar = new javax.swing.JButton();
+        cmdSalvar = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtObservacoes = new javax.swing.JTextPane();
         jLabel6 = new javax.swing.JLabel();
+        cmdNovo = new javax.swing.JButton();
 
         jLabel5.setText("jLabel5");
 
+        setClosable(true);
         setTitle("Atividade");
 
         jLabel1.setText("Codigo");
 
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Descricao");
 
-        chkConclusao.setText("Nova");
+        chknova.setText("Nova");
+        chknova.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chknovaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Status");
 
         jLabel4.setText("Data de Entrga");
 
         chkAnalise.setText("Em Analise");
+        chkAnalise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAnaliseActionPerformed(evt);
+            }
+        });
 
         chkDesenvolvimento.setText("Em Desenvolvimento");
+        chkDesenvolvimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkDesenvolvimentoActionPerformed(evt);
+            }
+        });
 
         chkConcluida.setText("Concluída");
+        chkConcluida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkConcluidaActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Buscar");
+        cmdBuscar.setText("Buscar");
+        cmdBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Salvar");
+        cmdSalvar.setText("Salvar");
+        cmdSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSalvarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cancelar");
+        cmdCancelar.setText("Cancelar");
+        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCancelarActionPerformed(evt);
+            }
+        });
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtObservacoes);
 
         jLabel6.setText("Observações");
+
+        cmdNovo.setText("Nova");
+        cmdNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdNovoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,37 +160,42 @@ public class formAtividade extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmdSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
-                                .addComponent(jLabel1))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(chkConclusao)
-                                            .addGap(12, 12, 12)
-                                            .addComponent(chkAnalise)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(chkDesenvolvimento)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(chkConcluida))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addComponent(jButton3)
-                        .addComponent(jScrollPane1))
-                    .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(chknova)
+                                .addGap(18, 18, 18)
+                                .addComponent(chkAnalise)
+                                .addGap(18, 18, 18)
+                                .addComponent(chkDesenvolvimento)
+                                .addGap(18, 18, 18)
+                                .addComponent(chkConcluida)
+                                .addGap(184, 184, 184))
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,45 +204,138 @@ public class formAtividade extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(cmdBuscar)
+                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkConclusao)
+                    .addComponent(chknova)
                     .addComponent(jLabel3)
                     .addComponent(chkAnalise)
                     .addComponent(chkDesenvolvimento)
                     .addComponent(chkConcluida))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(5, 5, 5)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(cmdSalvar)
+                    .addComponent(cmdCancelar)
+                    .addComponent(cmdNovo))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void chknovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chknovaActionPerformed
+
+        chkAnalise.setSelected(false);
+        chkDesenvolvimento.setSelected(false);
+        chkConcluida.setSelected(false);
+
+    }//GEN-LAST:event_chknovaActionPerformed
+
+    private void chkAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAnaliseActionPerformed
+
+        chknova.setSelected(false);
+        chkDesenvolvimento.setSelected(false);
+        chkConcluida.setSelected(false);
+    }//GEN-LAST:event_chkAnaliseActionPerformed
+
+    private void chkDesenvolvimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDesenvolvimentoActionPerformed
+        chkConcluida.setSelected(false);
+        chknova.setSelected(false);
+        chkAnalise.setSelected(false);
+    }//GEN-LAST:event_chkDesenvolvimentoActionPerformed
+
+    private void chkConcluidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkConcluidaActionPerformed
+        chknova.setSelected(false);
+        chkAnalise.setSelected(false);
+        chkDesenvolvimento.setSelected(false);
+    }//GEN-LAST:event_chkConcluidaActionPerformed
+
+    private void cmdBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarActionPerformed
+
+        try {
+            EAtividade atividade = _Atividade.consultar(Integer.parseInt(txtCodigo.getText()));
+            PreecheCampos(atividade);
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_cmdBuscarActionPerformed
+
+    private void cmdSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalvarActionPerformed
+        try {
+            EAtividade atividade = new EAtividade();
+            if (!_Editar) {
+
+                atividade.setDescricao(txtDescricao.getText());
+                atividade.setDataDeEntrega(txtData.getText());
+                atividade.setConcluida(chkConcluida.isSelected());
+                atividade.setDescricao(txtObservacoes.getText());
+                NUsuario nUsuario = new NUsuario();
+                atividade.setUsuario(nUsuario.Buscar(Principal1.Usuario.getCodigo()));
+
+                _Atividade.salvar(atividade);
+
+                JOptionPane.showMessageDialog(null, "Atividade Salva com sucesso!");
+            } else {
+                atividade.setCodigo(Integer.parseInt(txtCodigo.getText()));
+                atividade.setDescricao(txtDescricao.getText());
+                atividade.setDataDeEntrega(txtData.getText());
+                atividade.setConcluida(chkConcluida.isSelected());
+                atividade.setDescricao(txtObservacoes.getText());
+                NUsuario nUsuario = new NUsuario();
+                atividade.setUsuario(nUsuario.Buscar(Principal1.Usuario.getCodigo()));
+
+                _Atividade.Alterar(atividade);
+
+                JOptionPane.showMessageDialog(null, "Atividade Alterada com sucesso!");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_cmdSalvarActionPerformed
+
+    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
+
+        this.dispose();
+    }//GEN-LAST:event_cmdCancelarActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+
+        SetCampos(false);
+
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void cmdNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNovoActionPerformed
+        SetCampos(true);
+        txtCodigo.setEditable(false);
+    }//GEN-LAST:event_cmdNovoActionPerformed
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+        SetCampos(false);
+    }//GEN-LAST:event_txtCodigoKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chkAnalise;
     private javax.swing.JCheckBox chkConcluida;
-    private javax.swing.JCheckBox chkConclusao;
     private javax.swing.JCheckBox chkDesenvolvimento;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox chknova;
+    private javax.swing.JButton cmdBuscar;
+    private javax.swing.JButton cmdCancelar;
+    private javax.swing.JButton cmdNovo;
+    private javax.swing.JButton cmdSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -168,9 +343,28 @@ public class formAtividade extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextPane txtObservacoes;
     // End of variables declaration//GEN-END:variables
+
+    private void PreecheCampos(EAtividade atividade) {
+
+        txtCodigo.setText("" + atividade.getCodigo());
+        txtData.setText("" + atividade.getDataDeEntrega());
+        txtDescricao.setText(atividade.getDescricao());
+        chkConcluida.setSelected(atividade.isConcluida());
+        txtObservacoes.setText(atividade.getRelatoFinal());
+    }
+
+    private void SetCampos(boolean b) {
+
+        txtData.setEditable(b);
+        txtDescricao.setEditable(b);
+        txtObservacoes.setEditable(b);
+        cmdSalvar.setEnabled(b);
+
+    }
+
 }

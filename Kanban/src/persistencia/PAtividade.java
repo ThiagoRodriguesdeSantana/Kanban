@@ -20,7 +20,7 @@ public class PAtividade {
         PreparedStatement prd = conn.prepareStatement(sql);
         
         prd.setString(1, eAtividade.getDescricao());
-        prd.setDate(2, eAtividade.getDataDeEntrega());
+        prd.setString(2, eAtividade.getDataDeEntrega());
         prd.setBoolean(3, eAtividade.isConcluida());
         prd.setString(4, eAtividade.getRelatoFinal());
         prd.setInt(5, eAtividade.getUsuario().getCodigo());
@@ -44,7 +44,7 @@ public class PAtividade {
         PreparedStatement prd = cnn.prepareStatement(sql);
         
         prd.setString(1, eAtividade.getDescricao());
-        prd.setDate(2, eAtividade.getDataDeEntrega());
+        prd.setString(2, eAtividade.getDataDeEntrega());
         prd.setBoolean(3, eAtividade.isConcluida());
         prd.setString(4, eAtividade.getRelatoFinal());
         prd.setInt(5, eAtividade.getUsuario().getCodigo());
@@ -86,7 +86,8 @@ public class PAtividade {
         if(rs.next()){
             eAtividade.setCodigo(rs.getInt("codigo"));
             eAtividade.setDescricao(rs.getString("descricao"));
-            eAtividade.setDataDeEntrega(rs.getDate("data_de_entrega"));
+            
+            eAtividade.setDataDeEntrega(rs.getString("data_de_entrega"));
             eAtividade.setConcluida(rs.getBoolean("concluida"));
             eAtividade.setRelatoFinal(rs.getString("relato_final"));
             eAtividade.getUsuario().setCodigo(rs.getInt("codigo_usuario"));
@@ -102,7 +103,7 @@ public class PAtividade {
     
     public List<EAtividade> listar(String descricao)throws SQLException{
         
-        String sql = "SELECT * FROM atividade WHERE descricao LIKE ?";
+        String sql = "SELECT *FROM atividade a inner join usuario u on a.codigo_usuario = u.codigo WHERE descricao LIKE ?";
         
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);
@@ -118,10 +119,10 @@ public class PAtividade {
             
             eAtividade.setCodigo(rs.getInt("codigo"));
             eAtividade.setDescricao(rs.getString("descricao"));
-            eAtividade.setDataDeEntrega(rs.getDate("data_de_entrega"));
+            eAtividade.setDataDeEntrega(rs.getString("data_de_entrega"));
             eAtividade.setConcluida(rs.getBoolean("concluida"));
             eAtividade.setRelatoFinal(rs.getString("relato_final"));
-            eAtividade.getUsuario().setCodigo(rs.getInt("codigo_usuario"));
+            eAtividade.getUsuario().setNome(rs.getString("nome"));
             
             lista.add(eAtividade);
         }

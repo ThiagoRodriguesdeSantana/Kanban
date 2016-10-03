@@ -1,11 +1,12 @@
 package entidade;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class EAtividade {
     private int codigo;
     private String descricao;
-    private Date dataDeEntrega;
+    private String dataDeEntrega;
     private boolean concluida;
     private String relatoFinal;
     private EUsuario usuario;
@@ -30,11 +31,11 @@ public class EAtividade {
         this.descricao = descricao;
     }
 
-    public Date getDataDeEntrega() {
+    public String getDataDeEntrega() {
         return dataDeEntrega;
     }
 
-    public void setDataDeEntrega(Date dataDeEntrega) {
+    public void setDataDeEntrega(String dataDeEntrega) {
         this.dataDeEntrega = dataDeEntrega;
     }
 

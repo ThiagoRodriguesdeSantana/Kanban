@@ -25,7 +25,7 @@ public class Servicos {
 
             email.setHostName("smtp.gmail.com");
             email.setSmtpPort(587);
-            email.setFrom("thiagorodriguescamara@gmail.com");
+            email.setFrom("kanbanworktime@gmail.com");
             email.addTo(emailDestino);
             email.setSubject("Equipe KanBan");
             email.setMsg(PegarMensagem());

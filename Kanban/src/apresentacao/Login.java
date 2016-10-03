@@ -61,6 +61,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        txtMail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMailKeyPressed(evt);
+            }
+        });
+
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Thiago\\Desktop\\KanBanMenor.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,7 +120,7 @@ public class Login extends javax.swing.JFrame {
             if (cmdEntrar.getText().equals("Entrar") && !txtSenha.getText().isEmpty()) {
 
                 if (nUsuario.ValidarLogin(txtMail.getText(), txtSenha.getText())) {
-                    Principal1 principal1 = new Principal1();
+                    Principal1 principal1 = new Principal1(txtMail.getText());
                     principal1.setVisible(true);
                     this.dispose();
                     
@@ -124,6 +130,7 @@ public class Login extends javax.swing.JFrame {
                  Principal1 principal1 = new Principal1(cadastroUsuario);
                  principal1.setVisible(true);
                  this.dispose();
+                 
 
                 
 
@@ -139,6 +146,12 @@ public class Login extends javax.swing.JFrame {
             cmdEntrar.setText("Entrar");
         }
     }//GEN-LAST:event_txtSenhaKeyPressed
+
+    private void txtMailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMailKeyPressed
+        if (!txtMail.getText().isEmpty()) {
+            cmdEntrar.setText("Entrar");
+        }
+    }//GEN-LAST:event_txtMailKeyPressed
 
     /**
      * @param args the command line arguments
