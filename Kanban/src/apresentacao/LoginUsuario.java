@@ -5,19 +5,33 @@
  */
 package apresentacao;
 
+import entidade.EUsuario;
+import javax.swing.JDesktopPane;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
+
 import negocio.NUsuario;
 
-/**
- *
- * @author Thiago
- */
 public class LoginUsuario extends javax.swing.JInternalFrame {
-
+    
+    JMenu _Menu1;
+    JMenu _Menu2;
+    JDesktopPane _pnlPrincipal;
+    public static EUsuario _EUsuario;
+    
     public LoginUsuario() {
         initComponents();
         cmdEntrar.setText("Cadastrar");
+        
+    }
 
+    public LoginUsuario(JMenu mnu1, JMenu mnu2, JDesktopPane pnlPrincipal) {
+        
+        this();
+        _Menu1 = mnu1;
+        _Menu2 = mnu2;
+        _pnlPrincipal = pnlPrincipal;
+        
     }
 
     /**
@@ -32,6 +46,7 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cmdEntrar = new javax.swing.JButton();
+        cmdCadastro = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
         txtMail = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -39,14 +54,17 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("Bem-Vindo");
         setVisible(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("Senha");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 70, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 255));
         jLabel5.setText("Email");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 50, 20));
 
         cmdEntrar.setText("Entrar");
         cmdEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -54,52 +72,26 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
                 cmdEntrarActionPerformed(evt);
             }
         });
+        getContentPane().add(cmdEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 90, -1));
+
+        cmdCadastro.setText("Cadastrar");
+        cmdCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCadastroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 90, 30));
 
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);
             }
         });
+        getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 280, -1));
+        getContentPane().add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 280, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Thiago\\Desktop\\KanBanMenor.png")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(cmdEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(cmdEntrar))
-            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,20 +99,21 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
     private void cmdEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEntrarActionPerformed
         try {
             NUsuario nUsuario = new NUsuario();
-
+            
             if (cmdEntrar.getText().equals("Entrar") && !txtSenha.getText().isEmpty()) {
-
+                
                 if (nUsuario.ValidarLogin(txtMail.getText(), txtSenha.getText())) {
+                    _EUsuario = nUsuario.BuscarPorEmail(txtMail.getText());
+                    _Menu1.setEnabled(true);
+                    _Menu2.setEnabled(true);
                     this.dispose();
                 }
             } else {
-              
+                
                 this.dispose();
                 
-                
-
             }
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
@@ -133,8 +126,27 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtSenhaKeyPressed
 
+    private void cmdCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCadastroActionPerformed
+        try {
+            
+            txtMail.setText("");
+            txtSenha.setText("");
+            
+            CadastroUsuario cadastroUsuario = new CadastroUsuario(_Menu1, _Menu1);
+            this._pnlPrincipal.add(cadastroUsuario);
+            cadastroUsuario.setVisible(true);
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        
+    }//GEN-LAST:event_cmdCadastroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdCadastro;
     private javax.swing.JButton cmdEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;

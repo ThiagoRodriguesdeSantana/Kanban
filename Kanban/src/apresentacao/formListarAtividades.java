@@ -30,13 +30,12 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
     }
 
     public formListarAtividades(JDesktopPane desktopPane) throws SQLException {
-        this();
-        try {
 
-            this.pnlPrincipal = desktopPane;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        initComponents();
+
+        this.pnlPrincipal = desktopPane;
+
+        PreencheGrid();
     }
 
     /**
@@ -303,19 +302,19 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
 
             NAtividade atividade = new NAtividade();
 
-            if (atividade.ChecarUsuario(usuario, linha)) {
+            //if (atividade.ChecarUsuario(usuario, linha)) {
 
                 formAtividade fAtividade = new formAtividade(codigo);
-                
+
                 this.pnlPrincipal.add(fAtividade);
                 fAtividade.setVisible(true);
 
-            }
+           // }
 
         } catch (Exception e) {
-            
+
             lbMensagem.setText(e.getMessage());
-            
+
         }
 
 
@@ -405,7 +404,7 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
                 linha.add("" + StatusEnum.Novo);
             }
             linha.add(item.getRelatoFinal());
-            linha.add(Principal1.Usuario.getNome());
+            linha.add(item.getUsuario().getNome());
             linha.add(item.getDataDeEntrega());
 
             detalhe.add(linha);

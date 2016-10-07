@@ -5,6 +5,7 @@
  */
 package negocio;
 
+import static apresentacao.Principal1.Usuario;
 import util.Servicos;
 import entidade.EUsuario;
 import java.sql.SQLException;
@@ -18,16 +19,22 @@ public class NUsuario {
 
     PUsuario pUsuario = new PUsuario();
     EUsuario eUsuario;
+    public static EUsuario _EUsuario;
+    
 
     public void inserir(EUsuario eUsuario) throws Exception {
         if (eUsuario.getNome().isEmpty() || eUsuario.getEmail().isEmpty()|| eUsuario.getSenha().isEmpty()) {
             throw new Exception("Você precisa preencher todos os campos!");
         }
-        if(BuscarPorEmail(eUsuario.getEmail()) != null){
+        if(BuscarPorEmail(eUsuario.getEmail()).getCodigo() != 0){
             throw new Exception("Email ja cadastrado!");
         }
 
         pUsuario.Inserir(eUsuario);
+    }
+    
+    public void Atualizar(EUsuario eUsuario) throws SQLException{
+        pUsuario.Alterar(eUsuario);
     }
 
     public EUsuario Buscar(int codigo) throws Exception {
@@ -44,7 +51,9 @@ public class NUsuario {
         return pUsuario.Buscar(nome);
     }
     public EUsuario BuscarPorEmail(String email) throws SQLException{
-      return pUsuario.BuscarPorEamil(email);
+      
+      _EUsuario = pUsuario.BuscarPorEamil(email);
+      return  _EUsuario;
     }
 
     public void Excluir(int codigo, String senha, String email) throws Exception {

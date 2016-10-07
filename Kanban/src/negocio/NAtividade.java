@@ -42,7 +42,7 @@ public class NAtividade {
     
     public  boolean ChecarUsuario(String usuario, int codigo) throws Exception{
         
-        if(!usuario.equals(apresentacao.Principal1.Usuario.getNome()))
+        if(!usuario.equals(NUsuario._EUsuario.getEmail()))
             throw new Exception("Você só tem permissão para excluir suas próprias atividades");
         else
             return true;

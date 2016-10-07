@@ -19,31 +19,13 @@ public class Principal1 extends javax.swing.JFrame {
 
     public Principal1() {
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH); 
-//        this.setUndecorated(true);
-//        this.setVisible(true);
-    }
-    
-    
+        this.setExtendedState(this.MAXIMIZED_BOTH);
 
-    public Principal1(String email) throws Exception {
-        this();
-        Usuario = PegarUsuario(email);
-
-    }
-
-    public Principal1(CadastroUsuario tela) {
-        
-        this();
-
-        this.pnlPrincipal.add(tela);
-        tela.setVisible(true);
-
-    }
-    
-    private EUsuario PegarUsuario(String email) throws Exception {
-        NUsuario nUsuario = new NUsuario();
-        return nUsuario.BuscarPorEmail(email);
+        LoginUsuario loginUsuario = new LoginUsuario(jmnuCadastro, jmnuEditar, pnlPrincipal);
+        this.pnlPrincipal.add(loginUsuario);
+        loginUsuario.setVisible(true);
+        jmnuCadastro.setEnabled(false);
+        jmnuEditar.setEnabled(false);
 
     }
 
@@ -65,11 +47,13 @@ public class Principal1 extends javax.swing.JFrame {
 
         pnlPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        formCadastro = new javax.swing.JMenu();
+        jmnuCadastro = new javax.swing.JMenu();
         tarefa = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jmnuEditar = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
@@ -82,7 +66,7 @@ public class Principal1 extends javax.swing.JFrame {
             .addGap(0, 452, Short.MAX_VALUE)
         );
 
-        formCadastro.setText("Novo");
+        jmnuCadastro.setText("Novo");
 
         tarefa.setText("Tarefa");
         tarefa.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +74,7 @@ public class Principal1 extends javax.swing.JFrame {
                 tarefaActionPerformed(evt);
             }
         });
-        formCadastro.add(tarefa);
+        jmnuCadastro.add(tarefa);
 
         jMenuItem1.setText("Lista de tafefas");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -98,11 +82,11 @@ public class Principal1 extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        formCadastro.add(jMenuItem1);
+        jmnuCadastro.add(jMenuItem1);
 
-        jMenuBar1.add(formCadastro);
+        jMenuBar1.add(jmnuCadastro);
 
-        jMenu2.setText("Editar");
+        jmnuEditar.setText("Editar");
 
         jMenuItem2.setText("Usuário");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -110,9 +94,21 @@ public class Principal1 extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jmnuEditar.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmnuEditar);
+
+        jMenu1.setText("Sair");
+
+        jMenuItem3.setText("Sair");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -139,32 +135,35 @@ public class Principal1 extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         try {
+
             formListarAtividades atividades = new formListarAtividades(this.pnlPrincipal);
             this.pnlPrincipal.add(atividades);
             atividades.setVisible(true);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
+
         try {
-          
-            //int codigo,String nome, String email, String senha
-            CadastroUsuario cadastroUsuario = new CadastroUsuario(Usuario.getCodigo(),
-                    Usuario.getNome(), Usuario.getEmail(), Usuario.getSenha());
+
+            CadastroUsuario cadastroUsuario = new CadastroUsuario();
             this.pnlPrincipal.add(cadastroUsuario);
             cadastroUsuario.setVisible(true);
-            
-            
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+        Sair();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,12 +201,23 @@ public class Principal1 extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu formCadastro;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenu jmnuCadastro;
+    private javax.swing.JMenu jmnuEditar;
     private javax.swing.JDesktopPane pnlPrincipal;
     private javax.swing.JMenuItem tarefa;
     // End of variables declaration//GEN-END:variables
+
+    private void Sair() {
+
+        int resp = JOptionPane.showConfirmDialog(null, "Deseja Sair Do Systema", "KanBan", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION);
+        if (resp == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+
+    }
 }
