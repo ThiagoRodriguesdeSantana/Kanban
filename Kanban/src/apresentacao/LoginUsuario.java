@@ -6,6 +6,10 @@
 package apresentacao;
 
 import entidade.EUsuario;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JDesktopPane;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
@@ -22,6 +26,8 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
     public LoginUsuario() {
         initComponents();
         cmdEntrar.setText("Cadastrar");
+        txtSenha.addActionListener(action);
+        cmdEntrar.addActionListener(action);
         
     }
 
@@ -67,11 +73,6 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 50, 20));
 
         cmdEntrar.setText("Entrar");
-        cmdEntrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdEntrarActionPerformed(evt);
-            }
-        });
         getContentPane().add(cmdEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 90, -1));
 
         cmdCadastro.setText("Cadastrar");
@@ -90,35 +91,15 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
         getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 280, -1));
         getContentPane().add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 280, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Thiago\\Desktop\\KanBanMenor.png")); // NOI18N
+        jLabel6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel6KeyPressed(evt);
+            }
+        });
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmdEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEntrarActionPerformed
-        try {
-            NUsuario nUsuario = new NUsuario();
-            
-            if (cmdEntrar.getText().equals("Entrar") && !txtSenha.getText().isEmpty()) {
-                
-                if (nUsuario.ValidarLogin(txtMail.getText(), txtSenha.getText())) {
-                    _EUsuario = nUsuario.BuscarPorEmail(txtMail.getText());
-                    _Menu1.setEnabled(true);
-                    _Menu2.setEnabled(true);
-                    this.dispose();
-                }
-            } else {
-                
-                this.dispose();
-                
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        }
-
-    }//GEN-LAST:event_cmdEntrarActionPerformed
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
         if (!txtSenha.getText().isEmpty()) {
@@ -144,6 +125,39 @@ public class LoginUsuario extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_cmdCadastroActionPerformed
 
+    private void jLabel6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel6KeyPressed
+        
+    }//GEN-LAST:event_jLabel6KeyPressed
+
+    
+    Action action = new AbstractAction(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            try {
+            NUsuario nUsuario = new NUsuario();
+            
+            if (cmdEntrar.getText().equals("Entrar") && !txtSenha.getText().isEmpty()) {
+                
+                if (nUsuario.ValidarLogin(txtMail.getText(), txtSenha.getText())) {
+                    _EUsuario = nUsuario.BuscarPorEmail(txtMail.getText());
+                    _Menu1.setEnabled(true);
+                    _Menu2.setEnabled(true);
+                    dispose();
+                }
+            } else {
+                
+                JOptionPane.showMessageDialog(rootPane,"Digite uma Senha");
+                
+            }
+            
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+        }
+    };
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdCadastro;

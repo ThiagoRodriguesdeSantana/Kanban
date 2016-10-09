@@ -38,6 +38,7 @@ public class Splash extends javax.swing.JFrame {
                     Principal1 janela = new Principal1();
                     this.checkAccess();
                     janela.setVisible(true);
+                    dispose();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
@@ -110,6 +111,8 @@ public class Splash extends javax.swing.JFrame {
             }
         });
     }
+    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

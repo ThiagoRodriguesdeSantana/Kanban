@@ -6,8 +6,9 @@
 package apresentacao;
 
 import entidade.EUsuario;
+import java.awt.Dimension;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import negocio.NUsuario;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Principal1 extends javax.swing.JFrame {
 
         LoginUsuario loginUsuario = new LoginUsuario(jmnuCadastro, jmnuEditar, pnlPrincipal);
         this.pnlPrincipal.add(loginUsuario);
+        centralizarLogin(loginUsuario);
         loginUsuario.setVisible(true);
         jmnuCadastro.setEnabled(false);
         jmnuEditar.setEnabled(false);
@@ -55,6 +57,15 @@ public class Principal1 extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        pnlPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
@@ -76,7 +87,7 @@ public class Principal1 extends javax.swing.JFrame {
         });
         jmnuCadastro.add(tarefa);
 
-        jMenuItem1.setText("Lista de tafefas");
+        jMenuItem1.setText("Lista de Tarefas");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -161,9 +172,12 @@ public class Principal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-
         Sair();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Sair();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -219,5 +233,11 @@ public class Principal1 extends javax.swing.JFrame {
             System.exit(0);
         }
 
+    }
+
+    private void centralizarLogin(JInternalFrame login) {
+        Dimension panel = this.getSize();
+        Dimension internal = login.getSize();
+        login.setLocation((panel.width)/2,(panel.height)/2);
     }
 }

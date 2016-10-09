@@ -103,7 +103,7 @@ public class PAtividade {
     
     public List<EAtividade> listar(String descricao)throws SQLException{
         
-        String sql = "SELECT *FROM atividade a inner join usuario u on a.codigo_usuario = u.codigo WHERE descricao LIKE ?";
+        String sql = "SELECT * FROM atividade a inner join usuario u on a.codigo_usuario = u.codigo WHERE descricao LIKE ? ORDER BY a.codigo";
         
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement prd = cnn.prepareStatement(sql);

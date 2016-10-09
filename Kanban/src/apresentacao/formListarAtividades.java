@@ -92,6 +92,7 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
         jPopupMenu1.add(mnuEditar);
 
         setClosable(true);
+        setTitle("Lista de Atividades");
 
         grdAtividade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -379,7 +380,7 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
         cabecalho.add("Concluida");
         cabecalho.add("Observação");
         cabecalho.add("Usuario");
-        cabecalho.add("Data de Entrga");
+        cabecalho.add("Data de Entrega");
 
         Vector detalhe = new Vector();
 
@@ -417,5 +418,6 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
         }
 
     }
+    
 
 }
