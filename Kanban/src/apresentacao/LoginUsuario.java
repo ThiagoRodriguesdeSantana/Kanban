@@ -6,7 +6,6 @@
 package apresentacao;
 
 import entidade.EUsuario;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
