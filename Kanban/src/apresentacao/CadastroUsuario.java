@@ -26,7 +26,7 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
 
     public CadastroUsuario() {
         initComponents();
-        //SetEdicaoDeSenha(false);
+        SetEdicaoDeSenha(false);
         lbMessage.setVisible(false);
 
         txtCodigoUsuario.setText("" + NUsuario._EUsuario.getCodigo());
@@ -264,10 +264,10 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         try {
 
-//            _Usuario = new NUsuario();
-//            _Usuario.EnviarCodigo(txtEmail.getText(), txtNome.getText());
-//
-//            JOptionPane.showMessageDialog(null, "O codigo de confirmação foi enviado para o email " + txtEmail.getText());
+            _Usuario = new NUsuario();
+            _Usuario.EnviarCodigo(txtEmail.getText(), txtNome.getText());
+
+            JOptionPane.showMessageDialog(null, "O codigo de confirmação foi enviado para o email " + txtEmail.getText());
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);

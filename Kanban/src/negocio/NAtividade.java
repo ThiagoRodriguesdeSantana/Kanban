@@ -29,8 +29,8 @@ public class NAtividade {
     public EAtividade consultar(int codigo) throws SQLException, Exception {
       
         EAtividade atividade = pAtividade.Consultar(codigo);
-        if (atividade == null) {
-            throw new Exception("Código da atividade inválido");
+        if (atividade == null|| atividade.getCodigo() == 0 ){
+            throw new Exception("Código da atividade não emcontrado ou inválido");
         } else {
             return atividade;
         }

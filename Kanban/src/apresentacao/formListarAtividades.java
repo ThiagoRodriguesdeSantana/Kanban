@@ -296,20 +296,14 @@ public class formListarAtividades extends javax.swing.JInternalFrame {
         try {
             int linha = grdAtividade.getSelectedRow();
 
-            String usuario = (String) grdAtividade.getValueAt(linha, 4);
 
             int codigo = Integer.parseInt((String) grdAtividade.getValueAt(linha, 0));
-
-            NAtividade atividade = new NAtividade();
-
-            //if (atividade.ChecarUsuario(usuario, linha)) {
 
                 formAtividade fAtividade = new formAtividade(codigo);
 
                 this.pnlPrincipal.add(fAtividade);
                 fAtividade.setVisible(true);
 
-           // }
 
         } catch (Exception e) {
 
